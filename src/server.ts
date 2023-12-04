@@ -47,6 +47,18 @@ server.post('/api/users', async (req, res) => {
     }
 })
 
+server.post('/api/bikes', async (req, res) => {
+  try {
+    const bikeId = await app.registerBike(req.body)
+    res.status(201).json({ bikeId })
+  }
+  catch (error) {
+    res.status(500).json({
+      message: 'Internal server error.'
+    }) 
+  }
+})
+
 const port = 3000
 server.listen(port, () => {
     console.log(`Server listening on port ${port}`)
